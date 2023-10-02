@@ -32,11 +32,16 @@ namespace courseApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Course model)
+        public async Task<IActionResult> Create(CourseViewModel model)
         {
-            _context.Courses.Add(model);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _context.Courses.Add(new Course() {CourseId = model.CourseId,Title = model.Title, TeacherId = model.TeacherId});
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Teachers = new SelectList(await _context.Teachers.ToListAsync(), "TeacherId", "FullName");
+            return View(model);
         }
 
         [HttpGet]
@@ -101,6 +106,7 @@ namespace courseApp.Controllers
                 return RedirectToAction("Index");
                 
             }
+            ViewBag.Teachers = new SelectList(await _context.Teachers.ToListAsync(), "TeacherId", "FullName");
             return View(model);
         }
 
