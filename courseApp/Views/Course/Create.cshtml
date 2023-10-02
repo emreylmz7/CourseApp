@@ -1,0 +1,19 @@
+@model Course
+
+<h2>Add Course</h2>
+<hr>
+<form asp-controller="Course" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Course Title</label>
+        <input asp-for="Title" class="form-control">
+    </div>
+  
+    <div class="mb-3">
+        <label asp-for="TeacherId" class="form-label">Teacher</label>
+        <select asp-for="TeacherId" asp-items="ViewBag.Teachers" class="form-control">
+            <option value="">Choose</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Course</button>
+</form>

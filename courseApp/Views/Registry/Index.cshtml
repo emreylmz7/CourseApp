@@ -1,0 +1,33 @@
+@model IEnumerable<Registry>
+
+<h2>Student List</h2>
+<hr>
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th style="width: 150px;">@Html.DisplayNameFor(m => m.RegisterId)</th>
+            <th>@Html.DisplayNameFor(m => m.Student.Name)</th>
+            <th>@Html.DisplayNameFor(m => m.Course.Title)</th>
+            <th style="width: 150px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.RegisterId)</td>
+                <td>@Html.DisplayFor(modelItem => item.Student.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Course.Title)</td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@item.StudentId" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.StudentId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+       
+    </tbody>
+</table>
+
+<div class="text-center">
+    <a href="/Registry/Create" class="btn btn-success">Enroll Student in Course</a>
+</div>

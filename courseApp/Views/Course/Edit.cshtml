@@ -1,0 +1,38 @@
+@model CourseViewModel
+
+<div class="row">
+    <div class="col-8">
+        <h2>Edit Course Informations</h2>
+        <hr>
+        <form asp-controller="Course" asp-action="Edit" method="post">
+
+            <input type="hidden" asp-for="CourseId">
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label">Course Title</label>
+                <input asp-for="Title" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label asp-for="TeacherId" class="form-label">Teacher</label>
+                <select asp-for="TeacherId" asp-items="ViewBag.Teachers" class="form-control">
+                    <option value="">Choose</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+
+        </form>
+    </div>
+    <div class="col-4">
+        <h4>Courses</h4>
+        <hr>
+        <ul>
+            @foreach(var item in @Model.Registries)
+            {
+                <li>@item.Student.FullName</li>
+            }
+        </ul>
+    </div>
+</div>
+
